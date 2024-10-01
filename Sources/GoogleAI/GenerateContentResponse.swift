@@ -139,7 +139,7 @@ public struct Citation {
   public let endIndex: Int
 
   /// A link to the cited source.
-  public let uri: String
+  public let uri: String?
 
   /// The license the cited source work is distributed under, if specified.
   public let license: String?
