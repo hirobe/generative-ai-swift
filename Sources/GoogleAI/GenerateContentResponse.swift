@@ -131,7 +131,7 @@ public struct CitationMetadata {
 
 /// A struct describing a source attribution.
 @available(iOS 15.0, macOS 11.0, macCatalyst 15.0, *)
-public struct Citation {
+public struct Citation: Decodable {
   /// The inclusive beginning of a sequence in a model response that derives from a cited source.
   public let startIndex: Int
 
