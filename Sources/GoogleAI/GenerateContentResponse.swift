@@ -131,7 +131,7 @@ public struct CitationMetadata {
 
 /// A struct describing a source attribution.
 @available(iOS 15.0, macOS 11.0, macCatalyst 15.0, *)
-public struct Citation: Decodable {
+public struct Citation {
   /// The inclusive beginning of a sequence in a model response that derives from a cited source.
   public let startIndex: Int
 
@@ -317,7 +317,12 @@ extension Citation: Decodable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     startIndex = try container.decodeIfPresent(Int.self, forKey: .startIndex) ?? 0
     endIndex = try container.decode(Int.self, forKey: .endIndex)
-    uri = try container.decode(String.self, forKey: .uri)
+    if let uri = try container.decodeIfPresent(String.self, forKey: .uri),
+      !uri.isEmpty {
+      self.uri = uri
+    } else {
+        uri = nil
+    }
     if let license = try container.decodeIfPresent(String.self, forKey: .license),
        !license.isEmpty {
       self.license = license
